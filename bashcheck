@@ -2,35 +2,35 @@
 
 warn() {
 	if [ "$scary" == "1" ]; then
-		echo -e "$(hostname)\t\t \033[91mVULNERABLE: $1\033[39m"
+		echo -e "HOSTNAME\t\t \033[91mVULNERABLE: $1\033[39m"
 	else
-		echo -e "$(hostname)\t\t \033[93mFound non-exploitable $1\033[39m"
+		echo -e "HOSTNAME\t\t \033[93mFound non-exploitable $1\033[39m"
 	fi
 }
 
 good() {
-	echo -e "$(hostname)\t\t \033[92mCLEAN: $1\033[39m"
+	echo -e "HOSTNAME\t\t \033[92mCLEAN: $1\033[39m"
 }
 
 [ -n "$1" ] && bash=$(which $1) || bash=$(which bash)
 echo; echo
-echo -e "$(hostname)\t\t $($bash --version | head -n 1)"
+echo -e "HOSTNAME\t\t $($bash --version | head -n 1)"
 
 #r=`a="() { echo x;}" $bash -c a 2>/dev/null`
 if [ -n "$(env 'a'="() { echo x;}" $bash -c a 2>/dev/null)" ]; then
-	echo -e "$(hostname)\t\t \033[91mVariable function parser active, maybe VULNERABLE to unknown parser bugs\033[39m"
+	echo -e "HOSTNAME\t\t \033[91mVariable function parser active, maybe VULNERABLE to unknown parser bugs\033[39m"
 	scary=1
 elif [ -n "$(env 'BASH_FUNC_a%%'="() { echo x;}" $bash -c a 2>/dev/null)" ]; then
-	echo -e "$(hostname)\t\t \033[92mVariable function parser pre/suffixed [%%, upstream], bugs not exploitable\033[39m"
+	echo -e "HOSTNAME\t\t \033[92mVariable function parser pre/suffixed [%%, upstream], bugs not exploitable\033[39m"
 	scary=0
 elif [ -n "$(env 'BASH_FUNC_a()'="() { echo x;}" $bash -c a 2>/dev/null)" ]; then
-	echo -e "$(hostname)\t\t \033[92mVariable function parser pre/suffixed [(), redhat], bugs not exploitable\033[39m"
+	echo -e "HOSTNAME\t\t \033[92mVariable function parser pre/suffixed [(), redhat], bugs not exploitable\033[39m"
 	scary=0
 elif [ -n "$(env 'BASH_FUNC_<a>%%'="() { echo x;}" $bash -c a 2>/dev/null)" ]; then
-	echo -e "$(hostname)\t\t \033[92mVariable function parser pre/suffixed [<..>%%, apple], bugs not exploitable\033[39m"
+	echo -e "HOSTNAME\t\t \033[92mVariable function parser pre/suffixed [<..>%%, apple], bugs not exploitable\033[39m"
 	scary=0
 else
-	echo -e "$(hostname)\t\t \033[92mVariable function parser inactive, bugs not exploitable\033[39m"
+	echo -e "HOSTNAME\t\t \033[92mVariable function parser inactive, bugs not exploitable\033[39m"
 	scary=0
 fi
 
@@ -64,7 +64,7 @@ $bash -c "`for i in {1..200}; do echo -n "for x$i in; do :;"; done; for i in {1.
 if [ $? != 0 ]; then
 	warn "CVE-2014-7187 (nested loops off by one)"
 else
-	echo -e "$(hostname)\t\t \033[96mTest for CVE-2014-7187 not reliable without address sanitizer\033[39m"
+	echo -e "HOSTNAME\t\t \033[96mTest for CVE-2014-7187 not reliable without address sanitizer\033[39m"
 fi
 
 $($bash -c "f(){ x(){ _;};x(){ _;}<<a;}" 2>/dev/null)
