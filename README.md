@@ -3,11 +3,22 @@ bashcheck
 
 Test script for Shellshock and related vulnerabilities
 
+fork info
+==========
+This fork prepends all output with 'HOSTNAME' to allow for this script to be run against many servers at once, with 'HOSTNAME' being substituted with that server's name. The substitution does not take place here, but takes place in whatever script is running bashcheck
+
 background
 ==========
 
 The Bash vulnerability that is now known as Shellshock had an incomplete
 fix at first. There are currently 6 public vulnerabilities.
+
+shellshock and heartbleed
+=========================
+
+I wrote down some general thoughts about recent events and security
+in free software:
+* https://blog.hboeck.de/archives/857-How-to-stop-Bleeding-Hearts-and-Shocking-Shells.html
 
 interpreting results
 ====================
@@ -86,7 +97,7 @@ by Michal Zalewski (lcamtuf).
 Patch recommendation
 ====================
 
-Latest upstream patches (4.3 since patchlevel 030, 4.2 since patchleven 051)
+Latest upstream patches (4.3 since patchlevel 030, 4.2 since patchlevel 051)
 include all fixes.
 
 They also add prefixing to variable functions (a variant of Florian
