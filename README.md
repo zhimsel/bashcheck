@@ -1,27 +1,17 @@
-bashcheck
-=========
+#bashcheck
 
 Test script for Shellshock and related vulnerabilities
 
-fork info
-==========
+##fork info
 This fork prepends all output with 'HOSTNAME' to allow for this script to be run against many servers at once, with 'HOSTNAME' being substituted with that server's name. The substitution does not take place here, but takes place in whatever script is running bashcheck
 
-background
-==========
+##background
 
 The Bash vulnerability that is now known as Shellshock had an incomplete
 fix at first. There are currently 6 public vulnerabilities.
 
-shellshock and heartbleed
-=========================
 
-I wrote down some general thoughts about recent events and security
-in free software:
-* https://blog.hboeck.de/archives/857-How-to-stop-Bleeding-Hearts-and-Shocking-Shells.html
-
-interpreting results
-====================
+##interpreting results
 
 There's been some confusion how to interpret the results of this script
 and some people got scared by warnings on systems that didn't have any
@@ -38,37 +28,32 @@ They are still bugs that should be fixed, but there is nothing to worry
 about.
 
 
-usage
-=====
+##usage
 
 Just run script:
  `./bashcheck`
 
-CVE-2014-6271
-=============
+####CVE-2014-6271
 
 The original vulnerability.
 
 * https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6271
 
-CVE-2014-7169
-=============
+####CVE-2014-7169
 
 Further parser error, found by Tavis Ormandy (taviso).
 
 * https://twitter.com/taviso/status/514887394294652929
 * https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7169
 
-CVE-2014-7186
-=============
+####CVE-2014-7186
 
 Out of bound memory read error in redir_stack.
 
 * http://seclists.org/oss-sec/2014/q3/712
 * https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7186
 
-CVE-2014-7187
-=============
+####CVE-2014-7187
 
 Off-by-one error in nested loops.
 (check only works when Bash is built with -fsanitize=address)
@@ -76,8 +61,7 @@ Off-by-one error in nested loops.
 * http://seclists.org/oss-sec/2014/q3/712
 * https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7187
 
-CVE-2014-6277
-=============
+####CVE-2014-6277
 
 Uninitialized Memory use in make_redirect(), found by
 Michal Zalewski (lcamtuf).
@@ -85,8 +69,7 @@ Michal Zalewski (lcamtuf).
 * http://lcamtuf.blogspot.de/2014/10/bash-bug-how-we-finally-cracked.html
 * https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6277
 
-CVE-2014-6278
-=============
+####CVE-2014-6278
 
 Another parser bug, analysis still incomplete, also found
 by Michal Zalewski (lcamtuf).
@@ -94,8 +77,7 @@ by Michal Zalewski (lcamtuf).
 * http://lcamtuf.blogspot.de/2014/10/bash-bug-how-we-finally-cracked.html
 * https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-6278
 
-Patch recommendation
-====================
+##Patch recommendation
 
 Latest upstream patches (4.3 since patchlevel 030, 4.2 since patchlevel 051)
 include all fixes.
